@@ -32,10 +32,12 @@
                                 <div class="card-body">
                                     <small>{{ comment.user.name }}({{ comment.createdAt|date("d.m.Y h:i:s") }})</small>
                                     <p class="cart-text">{{ comment.content }}</p>
-                                    <p class="card-text float-right">
-                                        <a href="#">Edit</a>
-                                        <a href="#">delete</a>
-                                    </p>
+                                    {% if app.user == comment.user or app.user == post.user %}
+                                        <p class="card-text float-right">
+                                            <a href="{{ path('comment_edit', {id: comment.id}) }}">Edit</a>
+                                            <a href="{{ path('comment_delete', {id: comment.id}) }}">delete</a>
+                                        </p>
+                                    {% endif %}
                                 </div>
                             </div>
                         {% endif %}

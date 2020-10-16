@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if app.user is same as(comment.user) or app.user is same as (comment.post.user) %}
+        <div class="row mt-4 justify-content-center">
+            <div class="col-6">
+                {{ form_start(editForm, {'action':path('comment_update', {id: comment.id})}) }}
+                {{ form_row(editForm.content, {'attr': {value: comment.content }}) }}
+                {{ form_row(editForm.submit) }}
+                {{ form_rest(editForm) }}
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}
