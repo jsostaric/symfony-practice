@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Entity\PostLike;
+use App\Form\CommentFormType;
 use App\Form\PostForm;
 use App\Repository\LikeRepository;
 use App\Repository\PostRepository;
@@ -65,10 +66,13 @@ class PostController extends AbstractController
             'user' => $this->getUser()
         ]);
 
+        $commentForm = $this->createForm(CommentFormType::class);
+
         return $this->render('post/detail.html.twig', [
             'post' => $post,
             'canDelete' => $this->getUser() === $post->getUser(),
-            'userLikesPost' => $userLikesPost
+            'userLikesPost' => $userLikesPost,
+            'commentForm' => $commentForm->createView()
         ]);
     }
 

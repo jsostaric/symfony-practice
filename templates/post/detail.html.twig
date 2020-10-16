@@ -25,8 +25,35 @@
                                class="btn btn-danger text-right">Delete</a>
                         </div>
                     {% endif %}
+                    <hr>
+                    {% for comment in post.comments %}
+                        {% if comment %}
+                            <div class="card mt-2">
+                                <div class="card-body">
+                                    <small>{{ comment.user.name }}({{ comment.createdAt|date("d.m.Y h:i:s") }})</small>
+                                    <p class="cart-text">{{ comment.content }}</p>
+                                    <p class="card-text float-right">
+                                        <a href="#">Edit</a>
+                                        <a href="#">delete</a>
+                                    </p>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
                 </div>
             </div>
+
+
+            {% if app.user %}
+                <div class="row mt-4 justify-content-center">
+                    <div class="col-6">
+                        {{ form_start(commentForm, {'action':path('comment_create', {id: post.id})}) }}
+                        {{ form_row(commentForm.content) }}
+                        {{ form_row(commentForm.comment) }}
+                        {{ form_rest(commentForm) }}
+                    </div>
+                </div>
+            {% endif %}
         </div>
     </div>
 

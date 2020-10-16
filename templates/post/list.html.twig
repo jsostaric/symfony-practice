@@ -21,6 +21,20 @@
                     <h5 class="card-title">{{ post.user.name }}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{ post.createdAt|date("d.m.Y. h:i") }}</h6>
                     <p class="card-text">{{ post.content }}</p>
+                    <div class="row">
+                        <p>
+                            <span style="color: #c20b0b;">
+                                <i id="likeHeart"
+                                   class="fas fa-heart"></i>
+                            </span>
+                            <span class="likes-count">{{ post.likes|length }}</span>
+                        </p>
+                        <small>|</small>
+                        <p>
+                            <span><i class="fas fa-comments"></i></span>
+                            <span class="likes-count">{{ post.comments|length }}</span>
+                        </p>
+                    </div>
                     <a href="{{ path('post_details', {id: post.id}) }}" class="card-link">Details</a>
                 </div>
             </div>
